@@ -1,0 +1,201 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTIX | Contáctanos</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <img src="imagen/logo.png" alt="Logo SPORTIX">
+                SPORTIX
+            </a>
+
+            <button class="menu-btn" onclick="toggleMenu()" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#producto">Productos</a></li>
+                <li><a href="index.html#marca">Marca</a></li>
+                <li><a href="contacto.html">Contáctanos</a></li>
+                <li><a href="cuestionario.html">Cuestionario</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle"
+                            onclick="cambiarTema()" title="Cambiar tema">
+                        🌙
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ENCABEZADO -->
+    <section class="page-hero">
+        <span>SPORTIX</span>
+        <h1>Contáctanos</h1>
+        <p>
+            ¿Tienes alguna pregunta o necesitas información?
+            Envíanos un mensaje y estaremos encantados de ayudarte.
+        </p>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contacto-section">
+        <div class="section-title">
+            <span>ESTAMOS PARA AYUDARTE</span>
+            <h2>Ponte en contacto</h2>
+            <p>
+                Completa el formulario y envíanos tu mensaje.
+                Podrás ver el resultado del envío debajo del botón.
+            </p>
+        </div>
+
+        <div class="contacto-container">
+
+            <!-- INFORMACIÓN -->
+            <div class="contacto-info">
+                <h3>Hablemos</h3>
+                <p>
+                    En SPORTIX queremos brindarte la mejor atención.
+                    Puedes escribirnos para realizar consultas sobre nuestros productos.
+                </p>
+
+                <div class="contacto-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <strong>Correo electrónico</strong>
+                        <p>contacto@sportix.com</p>
+                    </div>
+                </div>
+
+                <div class="contacto-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <strong>Teléfono</strong>
+                        <p>+503 0000-0000</p>
+                    </div>
+                </div>
+
+                <div class="contacto-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <strong>Ubicación</strong>
+                        <p>El Salvador</p>
+                    </div>
+                </div>
+
+                <div class="contacto-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <strong>Horario</strong>
+                        <p>Lunes a sábado</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORMULARIO -->
+            <div class="contacto-form">
+                <form id="contactForm" onsubmit="enviarMensaje(event)">
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Escribe tu nombre"
+                            maxlength="100"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            placeholder="ejemplo@gmail.com"
+                            maxlength="200"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensaje">Envíanos un mensaje</label>
+                        <textarea
+                            id="mensaje"
+                            name="mensaje"
+                            rows="7"
+                            maxlength="1500"
+                            placeholder="Escribe aquí tu mensaje..."
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-enviar" id="btnEnviar">
+                        <i class="fa-brands fa-discord"></i>
+                        Enviar mensaje
+                    </button>
+
+                    <p id="mensajeExito" class="mensaje-exito"
+                       role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">
+                    <img src="imagen/logo.png" alt="SPORTIX"
+                         style="width:45px;height:45px;object-fit:contain;border-radius:50%;">
+                    SPORTIX
+                </div>
+                <p>Tu tienda deportiva.</p>
+            </div>
+
+            <div>
+                <h4>Enlaces</h4>
+                <p><a href="index.html">Inicio</a></p>
+                <p><a href="index.html#producto">Productos</a></p>
+                <p><a href="index.html#marca">Marca</a></p>
+                <p><a href="contacto.html">Contáctanos</a></p>
+            </div>
+
+            <div>
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="TikTok">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 SPORTIX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- CARGAR EL JAVASCRIPT EXTERNO UNA SOLA VEZ -->
+    <script src="script.js"></script>
+</body>
+</html>
+```

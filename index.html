@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTIX | Tienda Deportiva</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        .language-selector {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .language-btn {
+            padding: 7px 9px;
+            border: 1px solid #f5a623;
+            border-radius: 6px;
+            background: transparent;
+            color: inherit;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .language-btn:hover,
+        .language-btn.activo {
+            background: #f5a623;
+            color: #111;
+        }
+
+        .hero {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 35px;
+        }
+
+        .hero-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 560px;
+            justify-self: end;
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid rgba(245, 166, 35, .45);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+            background: #111827;
+        }
+
+        .hero-carousel-track {
+            display: flex;
+            transition: transform .65s ease-in-out;
+        }
+
+        .hero-carousel-slide {
+            flex: 0 0 100%;
+            min-width: 100%;
+            position: relative;
+        }
+
+        .hero-carousel-slide img {
+            display: block;
+            width: 100%;
+            height: 390px;
+            object-fit: cover;
+        }
+
+        .hero-carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px 18px 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.05rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, .85));
+        }
+
+        .hero-carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            color: #111;
+            background: #f5a623;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .hero-carousel-arrow.prev {
+            left: 12px;
+        }
+
+        .hero-carousel-arrow.next {
+            right: 12px;
+        }
+
+        .hero-carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            right: 16px;
+            z-index: 3;
+            display: flex;
+            gap: 7px;
+        }
+
+        .hero-carousel-dot {
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .6);
+            cursor: pointer;
+        }
+
+        .hero-carousel-dot.active {
+            background: #f5a623;
+            transform: scale(1.25);
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .hero-carousel {
+                justify-self: center;
+                max-width: 620px;
+            }
+
+            .hero-carousel-slide img {
+                height: 340px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero-carousel-slide img {
+                height: 260px;
+            }
+
+            .hero-carousel-caption {
+                font-size: .9rem;
+            }
+
+            .hero-carousel-arrow {
+                width: 34px;
+                height: 34px;
+            }
+
+            .language-selector {
+                margin: 8px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <a href="#inicio" class="logo">
+            <img src="imagenes/Emblema Sportix urbano con graffiti verde neon.png" alt="Logo SPORTIX">
+            SPORTIX
+        </a>
+
+        <button class="menu-btn" onclick="toggleMenu()" aria-label="Abrir menú">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#producto">Productos</a></li>
+            <li><a href="#marca">Marca</a></li>
+            <li><a href="#contacto">Contáctanos</a></li>
+            <li><a href="cuestionario.html">Cuestionario</a></li>
+
+            <li class="language-selector">
+                <button type="button" id="btn-es" class="language-btn activo" onclick="cambiarIdioma('es')">🇸🇻 ES</button>
+                <button type="button" id="btn-en" class="language-btn" onclick="cambiarIdioma('en')">🇺🇸 EN</button>
+            </li>
+
+            <li>
+                <button id="themeToggle" class="theme-toggle" onclick="cambiarTema()" title="Cambiar tema">🌙</button>
+
+                <button id="musicToggle" class="theme-toggle"
+                    onclick="controlarMusica()"
+                    title="Activar o pausar música"
+                    aria-label="Activar o pausar música">
+                    <i class="fa-solid fa-music"></i> 🔊
+                </button>
+
+                <audio id="musicaFondo" loop preload="none">
+                    <source src="musica/fondo.mp3" type="audio/mpeg">
+                    Tu navegador no admite audio.
+                </audio>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<section id="inicio" class="hero">
+    <div class="hero-content">
+        <span class="hero-tag" data-es="TIENDA DEPORTIVA" data-en="SPORTS STORE">TIENDA DEPORTIVA</span>
+
+        <h1>
+            <span data-es="Encuentra tus" data-en="Find your">Encuentra tus</span><br>
+            <span data-es="productos favoritos." data-en="favorite products.">productos favoritos.</span>
+        </h1>
+
+        <p data-es="En SPORTIX encontrarás productos deportivos diseñados para acompañarte en cada entrenamiento y ayudarte a alcanzar tus objetivos."
+           data-en="At SPORTIX, you will find sports products designed to support every workout and help you reach your goals.">
+            En SPORTIX encontrarás productos deportivos diseñados para acompañarte en cada entrenamiento y ayudarte a alcanzar tus objetivos.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#producto" class="btn-primary">
+                <span data-es="Explorar productos" data-en="Explore products">Explorar productos</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <a href="#contacto" class="btn-secondary" data-es="Contáctanos" data-en="Contact Us">Contáctanos</a>
+        </div>
+    </div>
+
+    <div class="hero-carousel" id="heroCarousel">
+        <div class="hero-carousel-track" id="heroCarouselTrack">
+            <div class="hero-carousel-slide">
+                <img src="imagenes/zapato1.webp" alt="Tenis deportivos SPORTIX PRO RUNNER">
+                <div class="hero-carousel-caption">SPORTIX PRO RUNNER</div>
+            </div>
+
+            <div class="hero-carousel-slide">
+                <img src="imagenes/zapato2.jpg" alt="Tenis deportivos SPORTIX SPEED">
+                <div class="hero-carousel-caption">SPORTIX SPEED</div>
+            </div>
+
+            <div class="hero-carousel-slide">
+                <img src="imagenes/zapato3.jpg" alt="Tenis deportivos SPORTIX PRO">
+                <div class="hero-carousel-caption">SPORTIX PRO</div>
+            </div>
+
+            <div class="hero-carousel-slide">
+                <img src="imagenes/zapato4.jpg" alt="Tenis deportivos SPORTIX ULTRA">
+                <div class="hero-carousel-caption">SPORTIX ULTRA</div>
+            </div>
+
+            <div class="hero-carousel-slide">
+                <img src="imagenes/zapato5.jpg" alt="Tenis deportivos SPORTIX ACTIVE">
+                <div class="hero-carousel-caption">SPORTIX ACTIVE</div>
+            </div>
+        </div>
+
+        <button class="hero-carousel-arrow prev" id="carouselPrev" type="button" aria-label="Imagen anterior">&#10094;</button>
+        <button class="hero-carousel-arrow next" id="carouselNext" type="button" aria-label="Imagen siguiente">&#10095;</button>
+
+        <div class="hero-carousel-dots" id="heroCarouselDots">
+            <button class="hero-carousel-dot active" type="button" aria-label="Imagen 1" data-slide="0"></button>
+            <button class="hero-carousel-dot" type="button" aria-label="Imagen 2" data-slide="1"></button>
+            <button class="hero-carousel-dot" type="button" aria-label="Imagen 3" data-slide="2"></button>
+            <button class="hero-carousel-dot" type="button" aria-label="Imagen 4" data-slide="3"></button>
+            <button class="hero-carousel-dot" type="button" aria-label="Imagen 5" data-slide="4"></button>
+        </div>
+    </div>
+</section>
+
+<section id="producto" class="section product-section">
+    <div class="section-title">
+        <span>COLECCIÓN SPORTIX</span>
+        <h2 data-es="Nuestros productos" data-en="Our Products">Nuestros productos</h2>
+        <p data-es="Conoce algunos de nuestros productos deportivos."
+           data-en="Discover some of our sports products.">
+            Conoce algunos de nuestros productos deportivos.
+        </p>
+    </div>
+
+    <div class="productos-grid">
+        <div class="producto-card">
+            <div class="producto-img">
+                <img src="imagenes/zapato1.webp" alt="SPORTIX PRO RUNNER">
+            </div>
+            <div class="producto-info">
+                <h3>SPORTIX PRO RUNNER</h3>
+                <p data-es="Tenis deportivos ideales para correr y entrenar."
+                   data-en="Sports shoes ideal for running and training.">
+                    Tenis deportivos ideales para correr y entrenar.
+                </p>
+                <div class="producto-bottom">
+                    <span class="precio">$69.99</span>
+                    <button class="btn-comprar" onclick="comprarProducto('SPORTIX PRO RUNNER', '$69.99')">Comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="producto-card">
+            <div class="producto-img">
+                <img src="imagenes/zapato2.jpg" alt="SPORTIX SPEED">
+            </div>
+            <div class="producto-info">
+                <h3>SPORTIX SPEED</h3>
+                <p data-es="Diseño ligero para mejorar tu comodidad."
+                   data-en="Lightweight design for greater comfort.">
+                    Diseño ligero para mejorar tu comodidad.
+                </p>
+                <div class="producto-bottom">
+                    <span class="precio">$74.99</span>
+                    <button class="btn-comprar" onclick="comprarProducto('SPORTIX SPEED', '$74.99')">Comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="producto-card">
+            <div class="producto-img">
+                <img src="imagenes/zapato3.jpg" alt="SPORTIX PRO">
+            </div>
+            <div class="producto-info">
+                <h3>SPORTIX PRO</h3>
+                <p data-es="Tecnología de amortiguación para tus entrenamientos."
+                   data-en="Cushioning technology for your workouts.">
+                    Tecnología de amortiguación para tus entrenamientos.
+                </p>
+                <div class="producto-bottom">
+                    <span class="precio">$79.99</span>
+                    <button class="btn-comprar" onclick="comprarProducto('SPORTIX PRO', '$79.99')">Comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="producto-card">
+            <div class="producto-img">
+                <img src="imagenes/zapato4.jpg" alt="SPORTIX ULTRA">
+            </div>
+            <div class="producto-info">
+                <h3>SPORTIX ULTRA</h3>
+                <p data-es="Tenis deportivos para actividades de alto rendimiento."
+                   data-en="Sports shoes for high-performance activities.">
+                    Tenis deportivos para actividades de alto rendimiento.
+                </p>
+                <div class="producto-bottom">
+                    <span class="precio">$84.99</span>
+                    <button class="btn-comprar" onclick="comprarProducto('SPORTIX ULTRA', '$84.99')">Comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="producto-card">
+            <div class="producto-img">
+                <img src="imagenes/zapato5.jpg" alt="SPORTIX ACTIVE">
+            </div>
+            <div class="producto-info">
+                <h3>SPORTIX ACTIVE</h3>
+                <p data-es="Comodidad y estilo para tu día a día."
+                   data-en="Comfort and style for everyday life.">
+                    Comodidad y estilo para tu día a día.
+                </p>
+                <div class="producto-bottom">
+                    <span class="precio">$64.99</span>
+                    <button class="btn-comprar" onclick="comprarProducto('SPORTIX ACTIVE', '$64.99')">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="marca" class="section">
+    <div class="section-title">
+        <span>CONOCE SPORTIX</span>
+        <h2 data-es="Nuestra marca" data-en="Our Brand">Nuestra marca</h2>
+        <p data-es="SPORTIX nace con la idea de ofrecer productos deportivos modernos, cómodos y accesibles para todos."
+           data-en="SPORTIX was created to offer modern, comfortable, and affordable sports products for everyone.">
+            SPORTIX nace con la idea de ofrecer productos deportivos modernos, cómodos y accesibles para todos.
+        </p>
+    </div>
+</section>
+
+<section id="contacto" class="section contact-section">
+    <div class="section-title">
+        <span>ESTAMOS PARA AYUDARTE</span>
+        <h2 data-es="¿Tienes alguna pregunta?" data-en="Do you have any questions?">¿Tienes alguna pregunta?</h2>
+        <p data-es="Envíanos un mensaje y nos pondremos en contacto contigo."
+           data-en="Send us a message and we will get back to you.">
+            Envíanos un mensaje y nos pondremos en contacto contigo.
+        </p>
+    </div>
+
+    <div class="contact-content">
+        <div class="contact-info">
+            <h3 data-es="Ponte en contacto" data-en="Get in Touch">Ponte en contacto</h3>
+            <p data-es="Puedes escribirnos utilizando el formulario. Estaremos atentos a tu mensaje."
+               data-en="You can contact us using the form. We will be waiting for your message.">
+                Puedes escribirnos utilizando el formulario. Estaremos atentos a tu mensaje.
+            </p>
+
+            <p><i class="fa-solid fa-envelope"></i> Correo: contacto@sportix.com</p>
+            <p><i class="fa-solid fa-phone"></i> Teléfono: 0000-0000</p>
+            <p><i class="fa-solid fa-location-dot"></i> Ubicación: El Salvador</p>
+        </div>
+
+        <!-- FORMULARIO CONECTADO A script.js -->
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre"
+                       placeholder="Escribe tu nombre" maxlength="100" required>
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="correo"
+                       placeholder="ejemplo@gmail.com" maxlength="200" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mensaje">Envíanos un mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="6"
+                          maxlength="1500" placeholder="Escribe tu mensaje..."
+                          required></textarea>
+            </div>
+
+            <button type="submit" class="btn-enviar" id="btnEnviar">
+                <i class="fa-brands fa-discord"></i>
+                Enviar mensaje
+            </button>
+
+            <p id="mensajeExito" class="mensaje-exito"
+               role="status" aria-live="polite"></p>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div>
+            <h3>SPORTIX</h3>
+            <p data-es="Tu tienda deportiva." data-en="Your sports store.">Tu tienda deportiva.</p>
+        </div>
+
+        <div>
+            <h4>Enlaces</h4>
+            <a href="#inicio">Inicio</a>
+            <a href="#producto">Productos</a>
+            <a href="#marca">Marca</a>
+            <a href="#contacto">Contáctanos</a>
+        </div>
+
+        <div>
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 SPORTIX. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<!-- CARGAR script.js ANTES DEL SCRIPT DE FUNCIONES DE LA PÁGINA -->
+<script src="script.js"></script>
+
+<script>
+    function toggleMenu() {
+        document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    function cambiarTema() {
+        document.body.classList.toggle("dark-mode");
+
+        const boton = document.getElementById("themeToggle");
+        boton.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+
+    function controlarMusica() {
+        const musica = document.getElementById("musicaFondo");
+        const boton = document.getElementById("musicToggle");
+
+        if (!musica || !boton) return;
+
+        if (musica.paused) {
+            musica.volume = 0.25;
+
+            musica.play()
+                .then(() => {
+                    boton.innerHTML = '<i class="fa-solid fa-pause"></i> 🔊';
+                    boton.title = "Pausar música";
+                    boton.setAttribute("aria-label", "Pausar música");
+                })
+                .catch(() => {
+                    alert("No se pudo reproducir la música. Revisa que el archivo musica/fondo.mp3 exista y sea válido.");
+                });
+        } else {
+            musica.pause();
+            boton.innerHTML = '<i class="fa-solid fa-music"></i> 🔇';
+            boton.title = "Reproducir música";
+            boton.setAttribute("aria-label", "Reproducir música");
+        }
+    }
+
+    function comprarProducto(nombre, precio) {
+        alert("Has seleccionado " + nombre + " por " + precio);
+    }
+
+    function cambiarIdioma(idioma) {
+        document.documentElement.lang = idioma;
+
+        document.querySelectorAll("[data-es][data-en]").forEach(elemento => {
+            elemento.textContent = elemento.getAttribute("data-" + idioma);
+        });
+
+        document.getElementById("btn-es").classList.toggle("activo", idioma === "es");
+        document.getElementById("btn-en").classList.toggle("activo", idioma === "en");
+
+        document.getElementById("nombre").placeholder =
+            idioma === "en" ? "Enter your name" : "Escribe tu nombre";
+
+        document.getElementById("correo").placeholder =
+            idioma === "en" ? "example@gmail.com" : "ejemplo@gmail.com";
+
+        document.getElementById("mensaje").placeholder =
+            idioma === "en" ? "Write your message..." : "Escribe tu mensaje...";
+    }
+
+    (function iniciarCarruselSPORTIX() {
+        const track = document.getElementById("heroCarouselTrack");
+        const carousel = document.getElementById("heroCarousel");
+        const dots = Array.from(document.querySelectorAll(".hero-carousel-dot"));
+        const prev = document.getElementById("carouselPrev");
+        const next = document.getElementById("carouselNext");
+
+        if (!track || !carousel || dots.length === 0 || !prev || !next) return;
+
+        let indiceActual = 0;
+        let temporizador;
+        const total = dots.length;
+
+        function mostrarImagen(indice) {
+            indiceActual = (indice + total) % total;
+            track.style.transform = `translateX(-${indiceActual * 100}%)`;
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle("active", i === indiceActual);
+                dot.setAttribute("aria-current", i === indiceActual ? "true" : "false");
+            });
+        }
+
+        function reiniciarTemporizador() {
+            clearInterval(temporizador);
+            temporizador = setInterval(() => mostrarImagen(indiceActual + 1), 4000);
+        }
+
+        prev.addEventListener("click", () => {
+            mostrarImagen(indiceActual - 1);
+            reiniciarTemporizador();
+        });
+
+        next.addEventListener("click", () => {
+            mostrarImagen(indiceActual + 1);
+            reiniciarTemporizador();
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener("click", () => {
+                mostrarImagen(Number(dot.dataset.slide));
+                reiniciarTemporizador();
+            });
+        });
+
+        carousel.addEventListener("mouseenter", () => clearInterval(temporizador));
+        carousel.addEventListener("mouseleave", reiniciarTemporizador);
+
+        mostrarImagen(0);
+        reiniciarTemporizador();
+    })();
+</script>
+
+</body>
+</html>

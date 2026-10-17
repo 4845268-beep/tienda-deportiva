@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cuestionario Web | SPORTIX</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* LOGO */
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .logo,
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* BOTÓN DE MODO OSCURO */
+        .theme-toggle {
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 18px;
+            background: #f5a623;
+            color: #111;
+        }
+
+        /* CUESTIONARIO */
+        .quiz-container {
+            width: min(900px, 92%);
+            margin: 40px auto;
+        }
+
+        .question {
+            background: #fff;
+            color: #222;
+            padding: 22px;
+            margin-bottom: 22px;
+            border-radius: 12px;
+            border-left: 5px solid #f5a623;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .question h3 {
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .option:hover {
+            background: #fff3dc;
+            border-color: #f5a623;
+        }
+
+        .option input {
+            accent-color: #f5a623;
+        }
+
+        .btn-primary {
+            cursor: pointer;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #f5a623;
+            color: #111;
+            font-weight: bold;
+            font-size: 16px;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #e69712;
+            transform: translateY(-2px);
+        }
+
+        #resultado {
+            display: none;
+            background: #fff;
+            color: #222;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 12px;
+            border-top: 5px solid #f5a623;
+            text-align: center;
+        }
+
+        /* MODO OSCURO */
+        body.dark-mode {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .navbar,
+        body.dark-mode footer {
+            background-color: #111;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .page-hero {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .question,
+        body.dark-mode #resultado {
+            background: #252525;
+            color: #f1f1f1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        body.dark-mode .option {
+            background: #303030;
+            color: #f1f1f1;
+            border-color: #555;
+        }
+
+        body.dark-mode .option:hover {
+            background: #3b3325;
+            border-color: #f5a623;
+        }
+
+        body.dark-mode a {
+            color: #f5a623;
+        }
+
+        @media (max-width: 700px) {
+            .logo-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .question {
+                padding: 16px;
+            }
+
+            .question h3 {
+                font-size: 17px;
+            }
+
+            .option {
+                font-size: 14px;
+            }
+
+            .btn-primary {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <header>
+
+        <nav class="navbar">
+
+            <a href="index.html" class="logo">
+
+                <img
+                    src="imagenes/Emblema Sportix urbano con graffiti verde neon.png"
+                    alt="Logo SPORTIX"
+                    class="logo-icon">
+
+                SPORTIX
+
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="javascript.html">JavaScript</a></li>
+                <li><a href="jquery.html">jQuery</a></li>
+                <li><a href="json.html">JSON</a></li>
+                <li><a href="hosting.html">Hosting</a></li>
+                <li><a href="cuestionario.html">Cuestionario</a></li>
+
+                <li>
+                    <button
+                        id="themeToggle"
+                        class="theme-toggle"
+                        type="button"
+                        onclick="cambiarTema()"
+                        aria-label="Cambiar tema"
+                        title="Cambiar entre modo claro y oscuro">
+                        🌙
+                    </button>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- PRESENTACIÓN -->
+    <section class="page-hero">
+
+        <span>REPASO FINAL</span>
+
+        <h1>Cuestionario Web</h1>
+
+        <p>
+            Comprueba cuánto aprendiste sobre JavaScript,
+            jQuery, JSON, Hosting y Dominios.
+        </p>
+
+    </section>
+
+
+    <!-- CUESTIONARIO -->
+    <main class="quiz-container">
+
+        <form id="quizForm">
+
+            <div class="question">
+
+                <h3>
+                    1. ¿Qué tecnología se utiliza principalmente
+                    para definir la estructura de una página web?
+                </h3>
+
+                <label class="option">
+                    <input type="radio" name="q1" value="a">
+                    JavaScript
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q1" value="b">
+                    HTML
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q1" value="c">
+                    JSON
+                </label>
+
+            </div>
+
+
+            <div class="question">
+
+                <h3>
+                    2. ¿Qué lenguaje permite agregar comportamiento
+                    e interactividad a una página web?
+                </h3>
+
+                <label class="option">
+                    <input type="radio" name="q2" value="a">
+                    CSS
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q2" value="b">
+                    JavaScript
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q2" value="c">
+                    HTML
+                </label>
+
+            </div>
+
+
+            <div class="question">
+
+                <h3>
+                    3. ¿Qué símbolo se utiliza frecuentemente
+                    en la sintaxis de jQuery?
+                </h3>
+
+                <label class="option">
+                    <input type="radio" name="q3" value="a">
+                    #
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q3" value="b">
+                    $
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q3" value="c">
+                    @
+                </label>
+
+            </div>
+
+
+            <div class="question">
+
+                <h3>4. ¿Qué significa JSON?</h3>
+
+                <label class="option">
+                    <input type="radio" name="q4" value="a">
+                    JavaScript Object Notation
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q4" value="b">
+                    Java Style Online Network
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q4" value="c">
+                    JavaScript Online Number
+                </label>
+
+            </div>
+
+
+            <div class="question">
+
+                <h3>
+                    5. ¿Cuál de los siguientes es un ejemplo de un TLD?
+                </h3>
+
+                <label class="option">
+                    <input type="radio" name="q5" value="a">
+                    .com
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q5" value="b">
+                    www
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q5" value="c">
+                    http
+                </label>
+
+            </div>
+
+
+            <div class="question">
+
+                <h3>
+                    6. ¿Qué servicio permite almacenar los archivos
+                    de un sitio web para que pueda estar disponible en Internet?
+                </h3>
+
+                <label class="option">
+                    <input type="radio" name="q6" value="a">
+                    Hosting
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q6" value="b">
+                    HTML
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q6" value="c">
+                    CSS
+                </label>
+
+            </div>
+
+
+            <div class="question">
+
+                <h3>
+                    7. ¿Cuál de estas funciones es un efecto típico de jQuery?
+                </h3>
+
+                <label class="option">
+                    <input type="radio" name="q7" value="a">
+                    fadeIn()
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q7" value="b">
+                    createHTML()
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q7" value="c">
+                    webPage()
+                </label>
+
+            </div>
+
+
+            <div class="question">
+
+                <h3>8. ¿Para qué se utiliza principalmente JSON?</h3>
+
+                <label class="option">
+                    <input type="radio" name="q8" value="a">
+                    Para crear estilos.
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q8" value="b">
+                    Para intercambiar y representar datos.
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q8" value="c">
+                    Para registrar dominios.
+                </label>
+
+            </div>
+
+
+            <div class="question">
+
+                <h3>
+                    9. ¿Qué plataforma puede utilizarse para desplegar
+                    un sitio conectado a GitHub?
+                </h3>
+
+                <label class="option">
+                    <input type="radio" name="q9" value="a">
+                    Vercel
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q9" value="b">
+                    HTML
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q9" value="c">
+                    JSON
+                </label>
+
+            </div>
+
+
+            <div class="question">
+
+                <h3>
+                    10. ¿Qué tecnología se encarga principalmente
+                    del estilo visual de una página?
+                </h3>
+
+                <label class="option">
+                    <input type="radio" name="q10" value="a">
+                    JSON
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q10" value="b">
+                    CSS
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="q10" value="c">
+                    JavaScript
+                </label>
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-check"></i>
+                Calificar cuestionario
+            </button>
+
+        </form>
+
+
+        <!-- RESULTADO -->
+        <div id="resultado" aria-live="polite">
+
+            <h2 id="score"></h2>
+
+            <p id="mensaje"></p>
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                onclick="location.reload()">
+                Intentar nuevamente
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+
+        <div class="footer-logo">
+
+            <img
+                src="imagenes/Emblema Sportix urbano con graffiti verde neon.png"
+                alt="Logo SPORTIX"
+                class="logo-icon">
+
+            SPORTIX
+
+        </div>
+
+        <p>
+            Proyecto educativo de desarrollo web.
+        </p>
+
+    </footer>
+
+
+    <!-- MODO OSCURO -->
+    <script>
+        function cambiarTema() {
+
+            document.body.classList.toggle("dark-mode");
+
+            const boton = document.getElementById("themeToggle");
+
+            if (document.body.classList.contains("dark-mode")) {
+                boton.textContent = "☀️";
+            } else {
+                boton.textContent = "🌙";
+            }
+
+        }
+    </script>
+
+    <!-- LÓGICA DE CALIFICACIÓN -->
+    <script src="quiz.js"></script>
+
+</body>
+
+</html>

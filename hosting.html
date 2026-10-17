@@ -1,0 +1,543 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hosting y Dominios | SPORTIX</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome para los iconos -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* LOGO */
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .logo,
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* BOTÓN DE MODO OSCURO */
+        .theme-toggle {
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 18px;
+            background: #f5a623;
+            color: #111;
+        }
+
+        /* TABLAS */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .compare-table th,
+        .compare-table td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .compare-table th {
+            background: #f5a623;
+            color: #111;
+        }
+
+        /* CÓDIGO */
+        .code-box {
+            background: #171717;
+            color: #f1f1f1;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0 25px;
+        }
+
+        .code-box pre {
+            margin: 0;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        /* TARJETAS INFORMATIVAS */
+        .info-card {
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 5px solid #f5a623;
+            border-radius: 8px;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        /* FLUJO DE FUNCIONAMIENTO */
+        .flow {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 30px 0;
+        }
+
+        .flow-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 110px;
+            min-height: 100px;
+            padding: 15px;
+            background: #1b1b1b;
+            color: #fff;
+            border: 2px solid #f5a623;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .flow-box i {
+            color: #f5a623;
+            font-size: 26px;
+        }
+
+        .flow-arrow {
+            font-size: 25px;
+            font-weight: bold;
+            color: #f5a623;
+        }
+
+        /* MODO OSCURO */
+        body.dark-mode {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .content,
+        body.dark-mode .page-hero {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .navbar,
+        body.dark-mode footer {
+            background-color: #111;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .info-card {
+            background: #252525;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .compare-table td {
+            background: #222;
+            color: #f1f1f1;
+            border-color: #555;
+        }
+
+        body.dark-mode .compare-table th {
+            background: #f5a623;
+            color: #111;
+        }
+
+        body.dark-mode a {
+            color: #f5a623;
+        }
+
+        @media (max-width: 700px) {
+            .logo-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .flow {
+                gap: 8px;
+            }
+
+            .flow-box {
+                min-width: 90px;
+                min-height: 85px;
+                font-size: 13px;
+            }
+
+            .flow-arrow {
+                font-size: 18px;
+            }
+
+            .compare-table th,
+            .compare-table td {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <header>
+
+        <nav class="navbar">
+
+            <a href="index.html" class="logo">
+
+                <img
+                    src="imagenes/Emblema Sportix urbano con graffiti verde neon.png"
+                    alt="Logo SPORTIX"
+                    class="logo-icon">
+
+                SPORTIX
+
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="javascript.html">JavaScript</a></li>
+                <li><a href="jquery.html">jQuery</a></li>
+                <li><a href="json.html">JSON</a></li>
+                <li><a href="hosting.html">Hosting</a></li>
+                <li><a href="cuestionario.html">Cuestionario</a></li>
+
+                <li>
+                    <button
+                        id="themeToggle"
+                        class="theme-toggle"
+                        type="button"
+                        onclick="cambiarTema()"
+                        aria-label="Cambiar tema"
+                        title="Cambiar entre modo claro y oscuro">
+                        🌙
+                    </button>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- PRESENTACIÓN -->
+    <section class="page-hero">
+
+        <span>TECNOLOGÍA 04</span>
+
+        <h1>Hosting y Dominios</h1>
+
+        <p>
+            Cómo llevar un sitio web desde nuestro computador hasta Internet.
+        </p>
+
+    </section>
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="content">
+
+        <h2>¿Qué es Web Hosting?</h2>
+
+        <p>
+            El Web Hosting es un servicio que permite almacenar los archivos
+            de un sitio web en un servidor conectado a Internet. Gracias a
+            este servicio, otras personas pueden visitar la página desde
+            sus dispositivos.
+        </p>
+
+
+        <h2>Tipos de Hosting</h2>
+
+        <h3>Hosting compartido</h3>
+
+        <p>
+            Varios sitios web utilizan los recursos de un mismo servidor.
+            Es una alternativa económica para proyectos pequeños.
+        </p>
+
+        <h3>VPS</h3>
+
+        <p>
+            Un servidor virtual privado ofrece recursos más controlados
+            y mayor capacidad de configuración.
+        </p>
+
+        <h3>Hosting en la nube</h3>
+
+        <p>
+            Utiliza infraestructura distribuida para ofrecer escalabilidad
+            y disponibilidad.
+        </p>
+
+
+        <h2>¿Qué es Vercel?</h2>
+
+        <p>
+            Vercel es una plataforma utilizada para desplegar aplicaciones
+            y sitios web. Un proyecto puede conectarse a un repositorio
+            de GitHub y desplegarse automáticamente.
+        </p>
+
+        <div class="info-card">
+
+            <strong>En este proyecto:</strong>
+
+            <p>
+                El repositorio de SPORTIX puede conectarse a Vercel.
+                Cada vez que se realice un cambio y se publique un commit,
+                Vercel puede generar una nueva versión del sitio, si la
+                integración está configurada correctamente.
+            </p>
+
+        </div>
+
+
+        <h2>¿Qué es un dominio?</h2>
+
+        <p>
+            Un dominio es el nombre que una persona utiliza para acceder
+            a un sitio web. Permite encontrar una página sin tener que
+            escribir directamente la dirección IP del servidor.
+        </p>
+
+        <div class="code-box">
+            <pre><code>www.sportix.com</code></pre>
+        </div>
+
+
+        <h2>TLD</h2>
+
+        <p>
+            TLD significa Top-Level Domain. Es la parte final de un dominio.
+        </p>
+
+        <table class="compare-table">
+
+            <thead>
+                <tr>
+                    <th>TLD</th>
+                    <th>Ejemplo</th>
+                    <th>Uso habitual</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>.com</td>
+                    <td>ejemplo.com</td>
+                    <td>Uso comercial y general</td>
+                </tr>
+
+                <tr>
+                    <td>.org</td>
+                    <td>ejemplo.org</td>
+                    <td>Frecuente en organizaciones</td>
+                </tr>
+
+                <tr>
+                    <td>.net</td>
+                    <td>ejemplo.net</td>
+                    <td>Relacionado originalmente con redes</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+        <h2>¿Qué es un subdominio?</h2>
+
+        <p>
+            Un subdominio es una división dentro de un dominio principal.
+            Puede utilizarse para organizar diferentes partes de un sitio web.
+        </p>
+
+        <div class="code-box">
+            <pre><code>blog.sportix.com</code></pre>
+        </div>
+
+
+        <h2>¿Qué es el DNS?</h2>
+
+        <p>
+            DNS significa Domain Name System. Es el sistema que permite
+            relacionar los nombres de dominio con la información necesaria
+            para encontrar los servidores correspondientes.
+        </p>
+
+        <p>
+            Cuando se modifica la configuración de un dominio, los cambios
+            pueden tardar un tiempo en reflejarse en diferentes redes.
+            A este proceso se le suele llamar propagación DNS.
+        </p>
+
+
+        <h2>Cómo funciona una visita a una página web</h2>
+
+        <div class="flow">
+
+            <div class="flow-box">
+                <i class="fa-solid fa-user"></i>
+                <span>Usuario</span>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-box">
+                <i class="fa-solid fa-globe"></i>
+                <span>Dominio</span>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-box">
+                <i class="fa-solid fa-server"></i>
+                <span>DNS</span>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-box">
+                <i class="fa-solid fa-cloud"></i>
+                <span>Hosting</span>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-box">
+                <i class="fa-solid fa-display"></i>
+                <span>Página web</span>
+            </div>
+
+        </div>
+
+
+        <h2>Proceso de publicación</h2>
+
+        <ol>
+            <li>Crear el sitio web en HTML, CSS y JavaScript.</li>
+            <li>Crear un repositorio en GitHub.</li>
+            <li>Subir los archivos y guardar los cambios mediante commits.</li>
+            <li>Conectar el repositorio con Vercel.</li>
+            <li>Configurar el despliegue y publicar el proyecto.</li>
+            <li>Obtener la URL pública para compartir el sitio.</li>
+        </ol>
+
+
+        <div class="info-card">
+
+            <strong>Importante:</strong>
+
+            <p>
+                Para publicar SPORTIX, verifica que los archivos HTML,
+                el archivo style.css y la carpeta de imágenes estén incluidos
+                en el repositorio. Comprueba también que los nombres y las
+                rutas de los archivos coincidan exactamente.
+            </p>
+
+        </div>
+
+
+        <h2>Fuentes consultadas</h2>
+
+        <ul>
+
+            <li>
+                <a href="https://vercel.com/docs"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Vercel Documentation
+                </a>
+            </li>
+
+            <li>
+                <a href="https://developer.mozilla.org/es/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    MDN Web Docs
+                </a>
+            </li>
+
+            <li>
+                <a href="https://www.cloudflare.com/learning/dns/what-is-dns/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Cloudflare Learning Center - DNS
+                </a>
+            </li>
+
+            <li>
+                <a href="https://www.w3schools.com/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    W3Schools
+                </a>
+            </li>
+
+        </ul>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+
+        <div class="footer-logo">
+
+            <img
+                src="imagenes/Emblema Sportix urbano con graffiti verde neon.png"
+                alt="Logo SPORTIX"
+                class="logo-icon">
+
+            SPORTIX
+
+        </div>
+
+        <p>
+            Proyecto educativo de desarrollo web.
+        </p>
+
+    </footer>
+
+
+    <!-- SCRIPT PARA CAMBIAR EL TEMA -->
+    <script>
+
+        function cambiarTema() {
+
+            document.body.classList.toggle("dark-mode");
+
+            const boton = document.getElementById("themeToggle");
+
+            if (document.body.classList.contains("dark-mode")) {
+                boton.textContent = "☀️";
+            } else {
+                boton.textContent = "🌙";
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

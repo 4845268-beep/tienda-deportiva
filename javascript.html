@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JavaScript | SPORTIX</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* LOGO */
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .logo,
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* BOTÓN DE TEMA */
+        .theme-toggle {
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 18px;
+            background: #f5a623;
+            color: #111;
+        }
+
+        .tema-contenedor {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* TABLA */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .compare-table th,
+        .compare-table td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .compare-table th {
+            background: #f5a623;
+            color: #111;
+        }
+
+        /* BLOQUES DE CÓDIGO */
+        .code-box {
+            background: #171717;
+            color: #f1f1f1;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0 25px;
+        }
+
+        .code-box pre {
+            margin: 0;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        /* TARJETA INFORMATIVA */
+        .info-card {
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 5px solid #f5a623;
+            border-radius: 8px;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        /* MODO OSCURO */
+        body.dark-mode {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .content,
+        body.dark-mode .page-hero {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .info-card {
+            background: #252525;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .compare-table td {
+            background: #222;
+            color: #f1f1f1;
+            border-color: #555;
+        }
+
+        body.dark-mode .compare-table th {
+            background: #f5a623;
+            color: #111;
+        }
+
+        body.dark-mode .code-box {
+            background: #080808;
+        }
+
+        body.dark-mode a {
+            color: #f5a623;
+        }
+
+        body.dark-mode .navbar {
+            background-color: #111;
+        }
+
+        body.dark-mode footer {
+            background-color: #111;
+            color: #f1f1f1;
+        }
+
+        @media (max-width: 700px) {
+            .logo-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .compare-table th,
+            .compare-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <header>
+        <nav class="navbar">
+
+            <a href="index.html" class="logo">
+                <img
+                    src="imagenes/Emblema Sportix urbano con graffiti verde neon.png"
+                    alt="Logo SPORTIX"
+                    class="logo-icon">
+                SPORTIX
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="javascript.html">JavaScript</a></li>
+                <li><a href="jquery.html">jQuery</a></li>
+                <li><a href="json.html">JSON</a></li>
+                <li><a href="hosting.html">Hosting</a></li>
+                <li><a href="cuestionario.html">Cuestionario</a></li>
+
+                <li class="tema-contenedor">
+                    <button
+                        id="themeToggle"
+                        class="theme-toggle"
+                        type="button"
+                        onclick="cambiarTema()"
+                        aria-label="Cambiar tema"
+                        title="Cambiar entre modo claro y oscuro">
+                        🌙
+                    </button>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <!-- PRESENTACIÓN -->
+    <section class="page-hero">
+
+        <span>TECNOLOGÍA 01</span>
+
+        <h1>JavaScript</h1>
+
+        <p>
+            El lenguaje que permite agregar comportamiento
+            e interactividad a las páginas web.
+        </p>
+
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="content">
+
+        <h2>¿Qué es JavaScript?</h2>
+
+        <p>
+            JavaScript es un lenguaje de programación utilizado
+            principalmente para crear páginas web interactivas.
+            Permite modificar elementos de una página, responder
+            a las acciones del usuario y procesar información.
+        </p>
+
+        <h2>HTML + CSS + JavaScript</h2>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Tecnología</th>
+                    <th>Función</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>HTML</td>
+                    <td>Define la estructura y contenido de la página.</td>
+                </tr>
+
+                <tr>
+                    <td>CSS</td>
+                    <td>Define colores, tamaños, posiciones y apariencia.</td>
+                </tr>
+
+                <tr>
+                    <td>JavaScript</td>
+                    <td>Agrega comportamiento e interactividad.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Conceptos básicos</h2>
+
+        <h3>Variables</h3>
+
+        <p>
+            Las variables permiten almacenar información que puede
+            utilizar el programa.
+        </p>
+
+        <div class="code-box">
+            <pre><code>let producto = "SPORTIX PRO";
+let precio = 69.99;
+
+console.log(producto);
+console.log(precio);</code></pre>
+        </div>
+
+        <h3>Funciones</h3>
+
+        <p>
+            Una función es un bloque de código que puede ejecutarse
+            cuando sea necesario.
+        </p>
+
+        <div class="code-box">
+            <pre><code>function saludar() {
+    alert("¡Bienvenido a SPORTIX!");
+}
+
+saludar();</code></pre>
+        </div>
+
+        <h3>Eventos</h3>
+
+        <p>
+            Los eventos permiten ejecutar código cuando sucede algo,
+            por ejemplo, cuando el usuario hace clic sobre un botón.
+        </p>
+
+        <div class="code-box">
+            <pre><code>const boton = document.querySelector("#comprar");
+
+boton.addEventListener("click", function() {
+    alert("Producto agregado");
+});</code></pre>
+        </div>
+
+        <div class="info-card">
+            <strong>Ejemplo práctico:</strong>
+
+            <p>
+                En SPORTIX utilizamos JavaScript para controlar
+                el menú responsive, cambiar entre el modo claro y oscuro
+                y mostrar un mensaje cuando el usuario pulsa el botón
+                "Comprar ahora".
+            </p>
+        </div>
+
+        <h2>Fuentes consultadas</h2>
+
+        <ul>
+            <li>
+                <a
+                    href="https://developer.mozilla.org/es/docs/Web/JavaScript"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    MDN Web Docs - JavaScript
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="https://www.w3schools.com/js/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    W3Schools - JavaScript
+                </a>
+            </li>
+        </ul>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+
+        <div class="footer-logo">
+            <img
+                src="imagenes/Emblema Sportix urbano con graffiti verde neon.png"
+                alt="Logo SPORTIX"
+                class="logo-icon">
+            SPORTIX
+        </div>
+
+        <p>
+            Proyecto educativo de desarrollo web.
+        </p>
+
+    </footer>
+
+    <!-- JAVASCRIPT PARA CAMBIAR EL TEMA -->
+    <script>
+        function cambiarTema() {
+
+            document.body.classList.toggle("dark-mode");
+
+            const boton = document.getElementById("themeToggle");
+
+            if (document.body.classList.contains("dark-mode")) {
+                boton.textContent = "☀️";
+            } else {
+                boton.textContent = "🌙";
+            }
+
+        }
+    </script>
+
+</body>
+</html>
